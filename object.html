@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+		input
+		{
+			margin-bottom: 15px;
+			padding: 6px;
+			width: 50%;
+			border-radius: 5px
+		}
+		#hide2
+		{
+			display: none
+		}
+		button
+		{
+			margin-bottom: 4px;
+			border-radius: 5px;
+			color: green
+		}
+	</style>
+	
+	<script type="text/javascript">
+		store=["Hello"];
+		retrieved = JSON.parse(localStorage.getItem("myLocalstorage"));
+		if(retrieved != undefined)
+		{
+			store =retrieved;
+		}
+		function submit()
+		{
+			if (author.value=='' || title.value=='' || np.value=='' || myStory.value=='')
+			{
+				demo.innerHTML='OOPS!!!<div>You have not uploaded your details successfully.</div>';
+			}
+			else
+			{
+				
+				function Library1(author,tittle,pages,story)
+				{
+					this.bookAuthor=author;
+					this.bookTittle=tittle;
+					this.bookPages=pages;
+					this.bookStory=story;
+				}
+
+					store.push(new Library1(author.value,title.value,np.value,myStory.value));
+					storage=JSON.stringify(store);
+					localStorage.setItem('myLocalstorage',storage);
+					
+					demo.innerHTML='Congraulations!<div>Your book has been uploaded successfully.</div><br /><div>Book details:'+'<div>Author:'+author.value+'</div><div>Tittle:'+title.value+'</div><div>Pages:'+np.value+'</div></div>';
+					author.value=title.value=np.value=myStory.value="";
+			}
+			
+		}
+
+		function access()
+		{
+			demo1.innerHTML='Name of Author: '+store[bn.value].bookAuthor;
+			demo2.innerHTML='Tittle of Book: '+store[bn.value].bookTittle;
+			demo3.innerHTML='No Of Pages: '+store[bn.value].bookPages;
+			demo4.innerHTML=store[bn.value].bookStory;
+			//alert(store[bt.value].bookAuthor)
+		}
+
+		function accessPage()
+		{
+			document.getElementById('hide1').style.display="none";
+			document.getElementById('hide2').style.display="inherit";
+		}
+		function donatePage()
+		{
+			document.getElementById('hide1').style.display="inherit";
+			document.getElementById('hide2').style.display="none";
+		}
+		function chk()
+		{	
+			//demo0.innerHTML='<ul>';
+			//store = JSON.parse(localStorage.getItem("myLocalstorage"));
+			for(i=1; i<=store.length;i++)
+			{
+				demo0.innerHTML+='<div>'+i+': Tittle of Book- ' + store[i].bookTittle+'</div>';
+			}
+			//demo0.innerHTML+='</ul>'
+		}
+
+
+	</script>
+
+</head>
+<body style="font-family: arial">
+	<div align="center" style="background-color: grey; width: 59%; margin-left: 20%; border-radius: 10px; margin-top: 10px; padding: 5px; color: white">
+	</div>
+	<div align="center" style="background-color: grey; width: 59%; margin-left: 20%; border-radius: 10px; margin-top: 10px;margin-bottom: 10px; padding: 5px; color: white">
+	</div>
+	<div id="hide1" align="center" style="background-color: grey; width: 60%; margin-left: 20%; padding-top: 3px; border-radius: 10px">
+		<div style="font-family: arial; padding: 6px; color: brown; background-color: white; width: 70%;margin-bottom: 4px; border-radius: 6px">BOOK DONATION PORTAL</div>
+		<input type="text" name="" id="author" placeholder="Author's name"><br>
+		<input type="text" name="" id="title" placeholder="Book Title"><br>
+		<input type="text" name="" id="np" placeholder="Number Of Pages"><br>
+		<input type="text" name="" id="myStory" placeholder="My Story" style="height: 6vh"><br>
+		<button onclick="submit()">Submit</button>
+		<button onclick="accessPage()">Access</button>
+		<button onclick="chk()">Library</button>
+		<div id="demo" style="color: brown; font-size: 16px"></div>
+	</div>
+	<div id="hide2" align="center" style="background-color: grey; width: 60%; margin-left: 20%; padding-top: 3px; border-radius: 10px">
+		<div style="font-family: arial; padding: 6px; color: brown; background-color: white; width: 70%;margin-bottom: 4px; border-radius: 6px">	BOOK ACCESS PORTAL
+		</div>
+		<input type="text" name="" id="bn" placeholder="Book s/n"><br>
+		<button onclick="access()">Access</button>
+		<button onclick="donatePage()">Donation</button>
+		<button onclick="chk()">Library</button>
+	</div>
+	<div id="demo0" align="center" style="background-color: grey; width: 59%; margin-left: 20%; border-radius: 10px; margin-top: 10px; padding: 5px; color: white">
+	</div>
+	<div align="center" style="background-color: grey; width: 59%; margin-left: 20%; border-radius: 10px; margin-top: 10px; padding: 5px; color: brown; font-weight: bold; font-size: 12px">
+		<div id="demo1"></div>
+		<div id="demo2"></div>
+		<div id="demo3"></div>
+		<div id="demo4" style="font-size: 10px; color: white; margin-top: 5px; font-weight: lighter;"></div>
+	</div>
+</body>
+</html>
